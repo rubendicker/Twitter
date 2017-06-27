@@ -27,7 +27,7 @@ public class LoginActivity extends OAuthLoginActionBarActivity<TwitterClient> {
 	public void onComposeAction(MenuItem mi) {
 		// handle click here
 		Intent i = new Intent(this, ComposeActivity.class);
-		startActivityForResult(i, 1);
+		startActivityForResult(i, 20);
 	}
 
 	// OAuth authenticated successfully, launch primary authenticated activity

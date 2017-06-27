@@ -101,7 +101,20 @@ public class TimelineActivity extends AppCompatActivity {
 
     public void onComposeAction(MenuItem mi) {
         // handle click here
-        Intent i = new Intent(this, ComposeActivity.class);
-        startActivityForResult(i, 1);
+        Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
+        i.putExtra("mode", 1);
+        startActivityForResult(i, 20);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE is defined above
+        if (resultCode == 20 && requestCode == 20) {
+
+            Tweet tweet = data.getParcelableExtra("tweet");
+            tweets.add(0, tweet);
+            tweetAdapter.notifyItemInserted(0);
+            rvTweets.scrollToPosition(0);
+        }
     }
 }
