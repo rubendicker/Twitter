@@ -2,12 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/ivProfileImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
+        android:layout_marginTop="5dp"
         app:srcCompat="@android:color/black"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
@@ -19,13 +21,13 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         android:layout_alignParentTop="true"
-        android:layout_alignStart="@+id/tvBody" />
+        android:layout_alignStart="@+id/tvBody"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/ivProfileImage"
         android:layout_below="@+id/tvUserName"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
@@ -51,4 +53,27 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:text="TextView" />
+
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_toEndOf="@+id/ivProfileImage"
+        android:text="REPLY"
+        android:textSize="10sp"
+        android:onClick="onReplyAction"/>
+
+    <Button
+        android:id="@+id/btnRT"
+        android:layout_width="70dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/tvUserName"
+        android:layout_toRightOf="@+id/btnReply"
+        android:text="RETWEET"
+        android:textSize="10sp" />
+
+
 </RelativeLayout>

@@ -19,28 +19,34 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 
-public class ComposeActivity extends AppCompatActivity {
+public class ReplyActivity extends AppCompatActivity {
 
     // EditText etCompose;
     String tweetText;
     TwitterClient client;
     private final int REQUEST_CODE = 20;
     private TextView mTextView;
-    EditText etCompose;
+    EditText etReply;
+    Tweet replyTweet;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compose);
+        setContentView(R.layout.activity_reply);
         client = TwitterApp.getRestClient();
-        etCompose = (EditText) findViewById(R.id.etCompose);
-        tweetText = etCompose.getText().toString();
+        etReply = (EditText) findViewById(R.id.etReply);
+        tweetText = etReply.getText().toString();
 
 
 
         mTextView = (TextView) findViewById(R.id.tvCounter);
-        etCompose.addTextChangedListener(tvCounter);
+        etReply.addTextChangedListener(tvCounter);
+
+
+        replyTweet = getIntent().getParcelableExtra("tweet");
+
+        etReply.setText("@" + replyTweet.user.screenName + " ");
 
 
         // the line below makes my app crash
@@ -63,11 +69,11 @@ public class ComposeActivity extends AppCompatActivity {
 
     public void onSubmit(View v) {
 
-        etCompose = (EditText) findViewById(R.id.etCompose);
+        etReply = (EditText) findViewById(R.id.etReply);
 
-        tweetText = etCompose.getText().toString();
+        tweetText = etReply.getText().toString();
 
-        client.sendTweet(tweetText, new JsonHttpResponseHandler() {
+        client.replyTweet(tweetText, replyTweet, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 

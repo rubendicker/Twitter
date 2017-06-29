@@ -33,8 +33,6 @@ public class Tweet implements Parcelable {
 
 
 
-
-
     //
     @Override
     public int describeContents() {
@@ -70,4 +68,25 @@ public class Tweet implements Parcelable {
             return new Tweet[size];
         }
     };
+
+
+    public String getBody() {
+        return body;
+    }
+
+    public long getUid() {
+        return uid;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public static Creator<Tweet> getCREATOR() {
+        return CREATOR;
+    }
 }
