@@ -27,6 +27,7 @@ public class ReplyActivity extends AppCompatActivity {
     private final int REQUEST_CODE = 20;
     private TextView mTextView;
     EditText etReply;
+    TextView tvReplyName;
     Tweet replyTweet;
 
 
@@ -36,6 +37,7 @@ public class ReplyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reply);
         client = TwitterApp.getRestClient();
         etReply = (EditText) findViewById(R.id.etReply);
+        tvReplyName = (TextView) findViewById(R.id.tvReplyName);
         tweetText = etReply.getText().toString();
 
 
@@ -47,6 +49,7 @@ public class ReplyActivity extends AppCompatActivity {
         replyTweet = getIntent().getParcelableExtra("tweet");
 
         etReply.setText("@" + replyTweet.user.screenName + " ");
+        tvReplyName.setText("In reply to " + replyTweet.user.name);
 
 
         // the line below makes my app crash
