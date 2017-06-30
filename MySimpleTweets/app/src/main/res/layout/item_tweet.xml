@@ -32,7 +32,9 @@
         android:layout_below="@+id/tvUserName"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="TextView" />
+        android:text="TextView"
+        android:autoLink="all"
+        />
 
     <TextView
         android:id="@+id/tvScreenName"
