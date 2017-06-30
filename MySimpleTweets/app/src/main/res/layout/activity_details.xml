@@ -70,27 +70,25 @@
 
     <Button
         android:id="@+id/btnRT"
-        android:layout_width="70dp"
+        android:layout_width="90dp"
         android:layout_height="40dp"
         android:layout_below="@+id/tvBody"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/tvUserName"
         android:layout_toRightOf="@+id/btnReply"
         android:text="RETWEET"
-        android:textSize="10sp"
-        android:visibility="invisible" />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/btnFav"
-        android:layout_width="80dp"
+        android:layout_width="90dp"
         android:layout_height="40dp"
         android:layout_below="@+id/tvBody"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/tvUserName"
         android:layout_toRightOf="@+id/btnRT"
         android:text="FAVORTIE"
-        android:textSize="10sp"
-        android:visibility="invisible" />
+        android:textSize="10sp" />
 
 
 </RelativeLayout>
