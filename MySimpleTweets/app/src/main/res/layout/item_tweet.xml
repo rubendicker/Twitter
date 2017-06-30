@@ -67,16 +67,5 @@
         android:text="REPLY"
         android:textSize="10sp" />
 
-    <Button
-        android:id="@+id/btnRT"
-        android:layout_width="70dp"
-        android:layout_height="40dp"
-        android:layout_below="@+id/tvBody"
-        android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/tvUserName"
-        android:layout_toRightOf="@+id/btnReply"
-        android:text="RETWEET"
-        android:textSize="10sp" />
-
 
 </RelativeLayout>

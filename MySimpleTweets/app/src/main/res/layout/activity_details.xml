@@ -23,28 +23,30 @@
         android:layout_alignStart="@+id/tvBody"
         android:maxLines="1"
         android:text="TextView"
+        android:textSize="24sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvUserName"
+        android:layout_below="@+id/tvScreenName"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/ivProfileImage"
-        android:text="TextView" />
+        android:autoLink="all"
+        android:text="TextView"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/tvScreenName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tvUserName"
+        android:layout_below="@+id/tvUserName"
         android:layout_marginLeft="5dp"
-        android:layout_toEndOf="@+id/tvUserName"
-        android:layout_toLeftOf="@+id/tvCreatedAt"
-        android:layout_toRightOf="@+id/tvUserName"
         android:maxLines="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tvCreatedAt"
@@ -53,7 +55,8 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
         android:maxLines="1"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnReply"
