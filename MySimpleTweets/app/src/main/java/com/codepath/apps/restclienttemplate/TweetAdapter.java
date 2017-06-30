@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,6 +19,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
+
+import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
+
 
 /**
  * Created by rdicker on 6/26/17.
@@ -58,7 +62,10 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvCreatedAt.setText("• " + getRelativeTimeAgo(tweet.createdAt));
         holder.tvBody.setText(tweet.body);
 
-        Glide.with(context).load(tweet.user.profileImageUrl).into(holder.ivProfileImage);
+        Glide.with(context)
+                .load(tweet.user.profileImageUrl)
+                .bitmapTransform(new RoundedCornersTransformation(context, 15, 0))
+                .into(holder.ivProfileImage);
     }
 
     @Override
@@ -75,6 +82,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvScreenName;
         public TextView tvCreatedAt;
         public Button btnReply;
+        public RelativeLayout myTweet;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -86,6 +94,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             btnReply = (Button) itemView.findViewById(R.id.btnReply);
+            myTweet = (RelativeLayout) itemView.findViewById(R.id.myTweet);
 
             btnReply.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -96,8 +105,27 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     context.startActivity(i);
                 }
             });
+
+
+
+
+
+            myTweet.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = getAdapterPosition();
+                    Intent i = new Intent(context, DetailsActivity.class);
+                    i.putExtra("tweet", mTweets.get(pos));
+                    context.startActivity(i);
+                }
+            });
         }
     }
+
+
+
+
+
 
     // getRelativeTimeAgo("Mon Apr 01 21:16:23 +0000 2014");
     public static String getRelativeTimeAgo(String rawJsonDate) {

@@ -10,14 +10,8 @@
         app:actionLayout="@layout/action_view_progress"
         app:showAsAction="always" />
     <item
-        android:id="@+id/miProfile"
-        android:icon="@drawable/ic_profile"
-        app:showAsAction="ifRoom|withText"
-        android:title="Profile">
-    </item>
-    <item
         android:id="@+id/item1"
-        android:icon="@drawable/ic_compose"
+        android:icon="@drawable/vector_compose_shortcut"
         android:onClick="onComposeAction"
         app:showAsAction="ifRoom"
         android:title="Compose">
