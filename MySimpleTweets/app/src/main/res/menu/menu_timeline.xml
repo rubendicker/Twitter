@@ -8,4 +8,12 @@
         android:onClick="onProfileView"
         android:title="Item"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/item1"
+        android:icon="@drawable/vector_compose_shortcut"
+        android:onClick="onComposeAction"
+        app:showAsAction="ifRoom"
+        android:title="Compose">
+    </item>
 </menu>

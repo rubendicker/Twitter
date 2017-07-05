@@ -96,8 +96,6 @@ public class TwitterClient extends OAuthBaseClient {
         client.post(apiUrl, params, handler);
     }
 
-
-
 	public void replyTweet(String message, Tweet tweet, AsyncHttpResponseHandler handler) {
 		String apiUrl = getApiUrl("statuses/update.json");
 		// Can specify query string params directly or through RequestParams.
@@ -106,10 +104,6 @@ public class TwitterClient extends OAuthBaseClient {
 		params.put("in_reply_to_status_id", Long.toString(tweet.getUid()));
 		client.post(apiUrl, params, handler);
 	}
-
-
-
-
 
 	public void favTweet(Tweet tweet, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("favorites/create.json");
@@ -124,9 +118,6 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("id", tweet.getUid());
         client.post(apiUrl, params, handler);
     }
-
-
-
 
     public void retweet(Tweet tweet, AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("statuses/retweet/");
@@ -144,6 +135,31 @@ public class TwitterClient extends OAuthBaseClient {
         RequestParams params = new RequestParams();
         params.put("status", tweet.getBody());
         client.post(apiUrl, params, handler);
+    }
+
+
+/*
+
+    public void getInfo(Tweet tweet, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("users/show/");
+        apiUrl+=tweet.getUid();
+        apiUrl+=".json";
+        RequestParams params = new RequestParams();
+        params.put("user_id", apiUrl);
+        params.put("screen_name", tweet.getUser());
+
+    }*/
+
+
+
+    public void getOtherUserProfile(String screenName, String uid, AsyncHttpResponseHandler handler) {
+        String apiUrl = getApiUrl("users/show.json");
+        // Can specify query string params directly or through RequestParams.
+        RequestParams params = new RequestParams();
+        params.put("screen_name", screenName);
+        params.put("in_reply_to_status_id", uid);
+        //  params.put("since_id", 1);
+        client.get(apiUrl, params, handler);
     }
 
 

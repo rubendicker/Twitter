@@ -30,6 +30,12 @@ public class HomeTimelineFragment extends TweetsListFragment {
         populateTimeline();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
+
 
 
     private void populateTimeline() {
@@ -65,7 +71,4 @@ public class HomeTimelineFragment extends TweetsListFragment {
             }
         });
     }
-
-
-
 }

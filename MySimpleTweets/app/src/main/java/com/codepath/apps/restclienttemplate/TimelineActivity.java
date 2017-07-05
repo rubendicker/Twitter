@@ -8,7 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.codepath.apps.restclienttemplate.fragments.HomeTimelineFragment;
 import com.codepath.apps.restclienttemplate.fragments.TweetsPagerAdapter;
+import com.codepath.apps.restclienttemplate.models.Tweet;
 
 public class TimelineActivity extends AppCompatActivity {
 
@@ -27,16 +29,23 @@ public class TimelineActivity extends AppCompatActivity {
     RecyclerView rvTweets;
     */
 
+    TweetsPagerAdapter pagerAdapter;
+    ViewPager vpPager;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
+        pagerAdapter = new TweetsPagerAdapter(getSupportFragmentManager(), this);
+
         // get the view pager
-        ViewPager vpPager = (ViewPager) findViewById(R.id.viewpager);
+        vpPager = (ViewPager) findViewById(R.id.viewpager);
 
         // set the adapter for the pager
-        vpPager.setAdapter(new TweetsPagerAdapter(getSupportFragmentManager(), this));
+        vpPager.setAdapter(pagerAdapter);
 
         // setup the TabLayout to use the view pager
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
@@ -51,7 +60,6 @@ public class TimelineActivity extends AppCompatActivity {
     }
 
 
-
     public void onComposeAction(MenuItem mi) {
         // handle click here
         Intent i = new Intent(TimelineActivity.this, ComposeActivity.class);
@@ -64,24 +72,22 @@ public class TimelineActivity extends AppCompatActivity {
 
 
 
-
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE is defined above
         if (resultCode == 20 && requestCode == 20) {
 
 
-            /*
+
 
             Tweet tweet = data.getParcelableExtra("tweet");
-            tweets.add(0, tweet);
-            tweetAdapter.notifyItemInserted(0);
-            rvTweets.scrollToPosition(0);
+            // tweets.add(0, tweet);
+           //  tweetAdapter.notifyItemInserted(0);
+           //  rvTweets.scrollToPosition(0);
 
 
-            */
+            ((HomeTimelineFragment) pagerAdapter.getItem(vpPager.getCurrentItem())).addTweet(tweet);
+
 
         }
     }
@@ -89,8 +95,7 @@ public class TimelineActivity extends AppCompatActivity {
     public void onProfileView(MenuItem item) {
         // Launch the profile view
         Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra("onMyProfile", true);
         startActivity(i);
     }
-
-
 }

@@ -53,7 +53,12 @@ public class TweetsListFragment extends Fragment {
 
 
         return v;
+    }
 
+    public void addTweet(Tweet tweet) {
+        tweets.add(0, tweet);
+        tweetAdapter.notifyItemInserted(0);
+        rvTweets.scrollToPosition(0);
     }
 
 
@@ -73,8 +78,5 @@ public class TweetsListFragment extends Fragment {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
-
     }
-
 }
