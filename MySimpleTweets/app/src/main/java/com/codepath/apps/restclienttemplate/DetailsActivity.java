@@ -88,11 +88,6 @@ public class DetailsActivity extends AppCompatActivity {
             public void onClick(View v) {
 
 
-
-
-
-
-
                 if(tweet.retweeted == false) {
                     client.retweet(tweet, new JsonHttpResponseHandler() {
                         @Override

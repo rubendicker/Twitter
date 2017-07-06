@@ -82,6 +82,12 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public TextView tvScreenName;
         public TextView tvCreatedAt;
         public Button btnReply;
+
+        Button btnRT;
+        Button btnFav;
+        TwitterClient client;
+        // Tweet tweet;
+
         public RelativeLayout myTweet;
 
         public ViewHolder(View itemView) {
@@ -94,6 +100,16 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             tvCreatedAt = (TextView) itemView.findViewById(R.id.tvCreatedAt);
             tvBody = (TextView) itemView.findViewById(R.id.tvBody);
             btnReply = (Button) itemView.findViewById(R.id.btnReply);
+
+            btnRT = (Button) itemView.findViewById(R.id.btnRT);
+            btnFav = (Button) itemView.findViewById(R.id.btnFav);
+            client = TwitterApp.getRestClient();
+            // tweet = getIntent().getParcelableExtra("tweet");
+
+            //int pos = getAdapterPosition();
+            //tweet = mTweets.get(pos);
+
+
             myTweet = (RelativeLayout) itemView.findViewById(R.id.myTweet);
 
             btnReply.setOnClickListener(new View.OnClickListener() {
@@ -117,8 +133,6 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 }
             });
 
-
-
             myTweet.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -128,6 +142,196 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                     context.startActivity(i);
                 }
             });
+
+
+
+
+
+
+/*
+
+
+
+
+            if (tweet.retweeted == false) {
+                btnRT.setText("retweet");
+            }
+            else {
+                btnRT.setText("unretweet");
+            }
+
+
+            btnRT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                    if(tweet.retweeted == false) {
+                        client.retweet(tweet, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                Log.d("TwitterClient", response.toString());
+                                btnRT.setText("Unretweet");
+                                tweet.retweeted = true;
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                Log.d("TwitterClient", responseString);
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+                        });
+
+                    }
+
+                    if(tweet.retweeted == true) {
+                        client.unRetweet(tweet, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                Log.d("TwitterClient", response.toString());
+                                btnRT.setText("Retweet");
+                                tweet.retweeted = false;
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                Log.d("TwitterClient", responseString);
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+                        });
+
+                    }
+
+
+
+
+                }
+            });
+
+
+
+            if (tweet.faved == false) {
+                btnFav.setText("favorite");
+            }
+            else {
+                btnFav.setText("unfavorite");
+            }
+
+
+            btnFav.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (tweet.faved == false) {
+
+
+
+                        client.favTweet(tweet, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                tweet.faved = true;
+                                btnFav.setText("unfavorite");
+                                Log.d("TwitterClient", response.toString());
+                                //Toast.makeText(DetailsActivity.this, "Favorited", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                Log.d("TwitterClient", responseString);
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+                        });
+
+                    }
+
+
+
+
+                    else {
+                        client.unFavTweet(tweet, new JsonHttpResponseHandler() {
+                            @Override
+                            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
+                                tweet.faved = false;
+                                btnFav.setText("favorite");
+                                Log.d("TwitterClient", response.toString());
+                                //Toast.makeText(DetailsActivity.this, "Unfavorited", Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                                Log.d("TwitterClient", responseString);
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONArray errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+
+                            @Override
+                            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
+                                Log.d("TwitterClient", errorResponse.toString());
+                                throwable.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
         }
     }
 

@@ -42,7 +42,7 @@ public class ComposeActivity extends AppCompatActivity {
 
         mTextView = (TextView) findViewById(R.id.tvCounter);
         etCompose.addTextChangedListener(tvCounter);
-        
+
 
 
         // the line below makes my app crash
