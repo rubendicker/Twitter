@@ -76,8 +76,7 @@
         android:layout_toEndOf="@+id/tvUserName"
         android:layout_toRightOf="@+id/btnReply"
         android:text="RETWEET"
-        android:textSize="10sp"
-        android:visibility="invisible" />
+        android:textSize="10sp" />
 
     <Button
         android:id="@+id/btnFav"
@@ -88,8 +87,7 @@
         android:layout_toEndOf="@+id/tvUserName"
         android:layout_toRightOf="@+id/btnRT"
         android:text="FAVORTIE"
-        android:textSize="10sp"
-        android:visibility="invisible" />
+        android:textSize="10sp" />
 
 
 </RelativeLayout>

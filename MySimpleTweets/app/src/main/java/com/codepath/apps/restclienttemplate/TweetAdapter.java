@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,17 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.apps.restclienttemplate.models.Tweet;
+import com.loopj.android.http.JsonHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import cz.msebera.android.httpclient.Header;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
 
 
@@ -62,10 +68,37 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         holder.tvCreatedAt.setText("• " + getRelativeTimeAgo(tweet.createdAt));
         holder.tvBody.setText(tweet.body);
 
+
+
+
+
+
         Glide.with(context)
                 .load(tweet.user.profileImageUrl)
                 .bitmapTransform(new RoundedCornersTransformation(context, 15, 0))
                 .into(holder.ivProfileImage);
+
+
+
+
+        if (tweet.retweeted == false) {
+            holder.btnRT.setText("retweet");
+        }
+        else {
+            holder.btnRT.setText("unretweet");
+        }
+
+
+
+
+        if (tweet.faved == false) {
+            holder.btnFav.setText("favorite");
+        }
+        else {
+            holder.btnFav.setText("unfavorite");
+        }
+
+
     }
 
     @Override
@@ -148,22 +181,31 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
 
 
-/*
 
 
 
 
-            if (tweet.retweeted == false) {
-                btnRT.setText("retweet");
-            }
-            else {
-                btnRT.setText("unretweet");
-            }
+
+//            if (tweet.retweeted == false) {
+//                btnRT.setText("retweet");
+//            }
+//            else {
+//                btnRT.setText("unretweet");
+//            }
+
+
+
 
 
             btnRT.setOnClickListener(new View.OnClickListener() {
+
+
                 @Override
                 public void onClick(View v) {
+
+                    int pos = getAdapterPosition();
+                    final Tweet tweet = mTweets.get(pos);
+
 
 
                     if(tweet.retweeted == false) {
@@ -234,17 +276,28 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
 
 
-            if (tweet.faved == false) {
-                btnFav.setText("favorite");
-            }
-            else {
-                btnFav.setText("unfavorite");
-            }
+
+
+//            if (tweet.faved == false) {
+//                btnFav.setText("favorite");
+//            }
+//            else {
+//                btnFav.setText("unfavorite");
+//            }
+
+
 
 
             btnFav.setOnClickListener(new View.OnClickListener() {
+
+
+
                 @Override
                 public void onClick(View v) {
+
+                    int pos = getAdapterPosition();
+                    final Tweet tweet = mTweets.get(pos);
+
                     if (tweet.faved == false) {
 
 
@@ -321,7 +374,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
 
 
 
-*/
+
 
 
 
