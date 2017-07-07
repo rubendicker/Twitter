@@ -1,10 +1,13 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -31,11 +34,15 @@ public class TimelineActivity extends AppCompatActivity {
 
     TweetsPagerAdapter pagerAdapter;
     ViewPager vpPager;
+    Context context;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        context = this;
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
 
@@ -53,10 +60,39 @@ public class TimelineActivity extends AppCompatActivity {
 
     }
 
+
+    /*
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_timeline, menu);
         return true;
+    }*/
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_timeline, menu);//placeholder make sure to change this
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // perform query here
+                //context = this;
+                Intent i = new Intent(context, SearchActivity.class);
+                i.putExtra("search_tweet", query);
+                context.startActivity(i);
+                searchView.clearFocus();
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+        return super.onCreateOptionsMenu(menu);
+
     }
 
 
